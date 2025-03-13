@@ -283,9 +283,6 @@ class DetailSalesRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->createAnother(false)
-                    // Solo mostrar el botón si no hay un detalle de venta ya creado
-                    ->visible(fn (): bool => !$this->hasDetailSale() && !$this->getOwnerRecord()->state)
                     ->modalWidth('3xl')
                     ->successNotification(
                         Notification::make()
