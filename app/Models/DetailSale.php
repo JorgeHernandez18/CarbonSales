@@ -72,6 +72,16 @@ class DetailSale extends Model
         return $this->belongsTo(SecondState::class);
     }
 
+    public function discharge_port() : BelongsTo
+    {
+        return $this->belongsTo(DischargePort::class, 'discharge_port_id');
+    }
+
+    public function port() : BelongsTo
+    {
+        return $this->belongsTo(Port::class);
+    }
+
     protected static function boot() {
         parent::boot();
 

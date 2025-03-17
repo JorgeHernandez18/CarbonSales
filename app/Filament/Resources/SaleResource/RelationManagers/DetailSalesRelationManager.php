@@ -147,19 +147,19 @@ class DetailSalesRelationManager extends RelationManager
                         ->schema([
                             Forms\Components\Grid::make(2)
                                 ->schema([
-                                    Forms\Components\TextInput::make('port')
+                                    Forms\Components\Select::make('port_id')
+                                        ->relationship('port', 'name')
+                                        ->placeholder('Seleccione un puerto')
                                         ->label('Puerto')
-                                        ->datalist(function () {
-                                            // Obtener puertos existentes para sugerencias
-                                            return \App\Models\DetailSale::distinct()->pluck('port')->filter()->toArray();
-                                        })
+                                        ->searchable()
+                                        ->preload()
                                         ->nullable(),
-                                    Forms\Components\TextInput::make('discharge_port')
+                                    Forms\Components\Select::make('discharge_port_id')
+                                        ->relationship('discharge_port', 'name')
+                                        ->placeholder('Seleccione un puerto de descarga')
                                         ->label('Puerto de descarga')
-                                        ->datalist(function () {
-                                            // Obtener puertos existentes para sugerencias
-                                            return \App\Models\DetailSale::distinct()->pluck('discharge_port')->filter()->toArray();
-                                        })
+                                        ->searchable()
+                                        ->preload()
                                         ->nullable(),
                                 ]),
                             Forms\Components\Grid::make(2)
