@@ -24,7 +24,6 @@ class SaleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
     protected static ?string $navigationLabel = 'Ventas';
     protected static ?string $modelLabel = 'Ventas';
-    //protected static ?string $navigationGroup = 'Ventas'; para tener en cuenta
 
     public static function form(Form $form): Form
     {
@@ -37,14 +36,14 @@ class SaleResource extends Resource
                     ->placeholder('Ingrese el número de contrato'),
                 Forms\Components\Hidden::make('user_id')
                     ->default(Auth::id()),
-                Forms\Components\Toggle::make('state')
+                /* Forms\Components\Toggle::make('state')
                     ->label('Venta asentada')
                     ->disabled()
-                    ->helperText('Una vez asentada, la venta no podrá ser modificada'),
+                    ->helperText('Una vez asentada, la venta no podrá ser modificada'), 
                 Forms\Components\DatePicker::make('settle_date')
                     ->label('Fecha de asentado')
                     ->disabled()
-                    ->visible(fn (Forms\Get $get): bool => $get('state')),
+                    ->visible(fn (Forms\Get $get): bool => $get('state')), */
             ]);
     }
 
@@ -60,19 +59,19 @@ class SaleResource extends Resource
                     ->label('Usuario')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('state')
+                /* Tables\Columns\IconColumn::make('state')
                     ->label('Asentada')
-                    ->boolean(),
+                    ->boolean(), 
                 Tables\Columns\TextColumn::make('settle_date')
                     ->label('Fecha de asentado')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable(), */
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Fecha de creación')
                     ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
-            ->filters([
+            /* ->filters([
                 Tables\Filters\Filter::make('state')
                     ->label('Estado')
                     ->form([
@@ -90,10 +89,11 @@ class SaleResource extends Resource
                                 fn (Builder $query): Builder => $query->where('state', $data['state']),
                             );
                     }),
-            ])
+            ]) */
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('settle')
+                Tables\Actions\DeleteAction::make(),
+                /* Tables\Actions\Action::make('settle')
                     ->label('Asentar venta')
                     ->icon('heroicon-o-lock-closed')
                     ->color('success')
@@ -109,7 +109,7 @@ class SaleResource extends Resource
                             ->body('La venta ha sido asentada correctamente y no podrá ser modificada.')
                             ->success()
                             ->send();
-                    }),
+                    }), */
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

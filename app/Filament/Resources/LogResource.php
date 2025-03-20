@@ -19,6 +19,12 @@ class LogResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationLabel = 'Historial de Cambios';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
     
     
     public static function form(Form $form): Form

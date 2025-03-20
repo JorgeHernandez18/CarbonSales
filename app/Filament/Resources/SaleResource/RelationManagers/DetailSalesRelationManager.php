@@ -271,9 +271,9 @@ class DetailSalesRelationManager extends RelationManager
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('sale_state_id')
+                /* Tables\Filters\SelectFilter::make('sale_state_id')
                     ->relationship('sale_state', 'name')
-                    ->label('Estado de venta'),
+                    ->label('Estado de venta'), */
                 Tables\Filters\SelectFilter::make('supplier_id')
                     ->relationship('supplier', 'name')
                     ->label('Suplidor'),
@@ -293,15 +293,15 @@ class DetailSalesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->visible(fn (Model $record): bool => $this->isEditable($record))
+                    //->visible(fn (Model $record): bool => $this->isEditable($record))
                     ->modalWidth('3xl'),
                 Tables\Actions\DeleteAction::make()
-                    ->visible(fn (Model $record): bool => $this->isEditable($record)),
+                    //->visible(fn (Model $record): bool => $this->isEditable($record)),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
-                        ->visible(fn (): bool => !$this->getOwnerRecord()->state),
+                        //->visible(fn (): bool => !$this->getOwnerRecord()->state),
                 ]),
             ])
             ->emptyStateHeading('Sin detalle de venta')
