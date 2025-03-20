@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class SecondState extends Model
 {
     //
+    protected $fillable = [
+        'name',
+        'description',
+    ];
 
     public function detail_sales() : HasMany
     {

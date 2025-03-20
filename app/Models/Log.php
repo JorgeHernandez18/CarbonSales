@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Log extends Model
 {
     //
+    protected $fillable = [
+        'detail_sale_id',
+        'user_id',
+        'modified_field',
+        'old_value',
+        'new_value',
+        'modified_date', 
+    ];
 
     public function user():BelongsTo
     {

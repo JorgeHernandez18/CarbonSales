@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Sale extends Model
 {
     //
+    protected $fillable = [
+        'contract',
+        'user_id',
+    ];
 
     public function detail_sale() : HasMany
     {

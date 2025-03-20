@@ -10,6 +10,33 @@ use Illuminate\Support\Facades\Auth;
 class DetailSale extends Model
 {
     //
+    protected $fillable = [
+        'sale_id',
+        'year',
+        'ops',
+        'inconterms',
+        'third',
+        'buque',
+        'from',
+        'to',
+        'ETA',
+        'BL',
+        'TM',
+        'load_rate',
+        'OVH',
+        'supplier_id',
+        'shipper_id',
+        'material_id',
+        'type_id',
+        'size_id',
+        'destination_country_id',
+        'sale_state_id',
+        'lab_id',
+        'agency_id',
+        'second_state_id',
+        'port_id',
+        'discharge_port_id',
+    ];
 
     public function sale() : BelongsTo
     {
@@ -84,14 +111,37 @@ class DetailSale extends Model
 
     protected static function boot() {
         parent::boot();
-
+    
         static::updating(function ($detailSale) {
             foreach ($detailSale->getDirty() as $field => $newValue) {
+                $oldValue = $detailSale->getOriginal($field) ?: 'N/A';
+    
+                // Verificar si el campo es una relación y obtener el nombre en lugar del ID
+                $relations = [
+                    'supplier_id' => Supplier::class,
+                    'shipper_id' => Shipper::class,
+                    'material_id' => Material::class,
+                    'type_id' => Type::class,
+                    'size_id' => Size::class,
+                    'destination_country_id' => DestinationCountry::class,
+                    'sale_state_id' => SaleState::class,
+                    'lab_id' => Lab::class,
+                    'agency_id' => Agency::class,
+                    'second_state_id' => SecondState::class,
+                    'port_id' => Port::class,
+                    'discharge_port_id' => DischargePort::class,
+                ];
+    
+                if (array_key_exists($field, $relations)) {
+                    $oldValue = $relations[$field]::find($oldValue)?->name ?? 'N/A';
+                    $newValue = $relations[$field]::find($newValue)?->name ?? 'N/A';
+                }
+    
                 Log::create([
                     'detail_sale_id' => $detailSale->id,
                     'user_id' => Auth::id(),
                     'modified_field' => $field,
-                    'old_value' => $detailSale->getOriginal($field) ?: 'N/A',
+                    'old_value' => $oldValue,
                     'new_value' => $newValue,
                     'modified_date' => now(),
                 ]);

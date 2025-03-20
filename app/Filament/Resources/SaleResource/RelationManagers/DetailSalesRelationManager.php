@@ -245,6 +245,9 @@ class DetailSalesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('ops')
                     ->label('OPS'),
                 Tables\Columns\TextColumn::make('supplier.name')
