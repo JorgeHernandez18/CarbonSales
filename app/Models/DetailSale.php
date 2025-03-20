@@ -131,10 +131,29 @@ class DetailSale extends Model
                     'port_id' => Port::class,
                     'discharge_port_id' => DischargePort::class,
                 ];
+
+                $fields = [
+                    'supplier_id' => 'Suplidor',
+                    'shipper_id' => 'Embarcador',
+                    'material_id' => 'Material',
+                    'type_id' => 'Tipo',
+                    'size_id' => 'Tamaño',
+                    'destination_country_id' => 'País de Destino',
+                    'sale_state_id' => 'Estado de Venta',
+                    'lab_id' => 'Laboratorio',
+                    'agency_id' => 'Agencia',
+                    'second_state_id' => 'Segundo Estado',
+                    'port_id' => 'Puerto',
+                    'discharge_port_id' => 'Puerto de Descarga',
+                ];
     
                 if (array_key_exists($field, $relations)) {
                     $oldValue = $relations[$field]::find($oldValue)?->name ?? 'N/A';
                     $newValue = $relations[$field]::find($newValue)?->name ?? 'N/A';
+                }
+
+                if (array_key_exists($field, $fields)) {
+                    $field = $fields[$field];
                 }
     
                 Log::create([

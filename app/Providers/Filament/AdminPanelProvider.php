@@ -26,9 +26,13 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3.5rem') // Ajusta la altura
+            ->sidebarCollapsibleOnDesktop()
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => '#15376A',
+                'gray'=> '#767171',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
