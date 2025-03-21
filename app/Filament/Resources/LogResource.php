@@ -24,8 +24,6 @@ class LogResource extends Resource
     {
         return false;
     }
-
-    
     
     public static function form(Form $form): Form
     {

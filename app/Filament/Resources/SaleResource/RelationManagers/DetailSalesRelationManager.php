@@ -8,6 +8,7 @@ use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -236,8 +237,8 @@ class DetailSalesRelationManager extends RelationManager
                             // Espacio para campos adicionales
                         ]),
                 ])->skippable()
-                  ->maxWidth('full'), // Aumentamos el ancho del wizard
-            ]);
+                  ->maxWidth('full') // Aumentamos el ancho del wizard
+            ])->columns(1); //Propiedad para que el wizard ocupe toda la pantalla del modal
     }
 
     public function table(Table $table): Table
