@@ -46,22 +46,22 @@ class DetailSalesRelationManager extends RelationManager
                                     Forms\Components\DatePicker::make('year')
                                         ->label('Año')
                                         ->nullable(),
-                                    Forms\Components\Select::make('ops')
+                                    Forms\Components\Select::make('ops_id')
                                         ->label('OPS')
-                                        ->options([
-                                            'Venta local' => 'Venta local',
-                                            'Exportacion' => 'Exportación',
-                                        ])
+                                        ->relationship('ops', 'name')
+                                        ->placeholder('Seleccione un ops')
+                                        ->searchable()
+                                        ->preload()
                                         ->nullable(),
                                 ]),
                             Forms\Components\Grid::make(2)
                                 ->schema([
-                                    Forms\Components\Select::make('inconterms')
-                                        ->options([
-                                            'DAP' => 'DAP',
-                                            'FOB' => 'FOB',
-                                            'FOT'=> 'FOT',
-                                        ])
+                                    Forms\Components\Select::make('inconterm_id')
+                                        ->label('Inconterms')
+                                        ->relationship('inconterm', 'name')
+                                        ->placeholder('Seleccione un inconterm')
+                                        ->searchable()
+                                        ->preload()
                                         ->nullable(),
                                     Forms\Components\Select::make('supplier_id')
                                         ->relationship('supplier', 'name')
@@ -249,7 +249,7 @@ class DetailSalesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('ops')
+                Tables\Columns\TextColumn::make('ops.name')
                     ->label('OPS'),
                 Tables\Columns\TextColumn::make('supplier.name')
                     ->label('Suplidor'),

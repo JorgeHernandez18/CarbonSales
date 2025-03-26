@@ -13,8 +13,6 @@ class DetailSale extends Model
     protected $fillable = [
         'sale_id',
         'year',
-        'ops',
-        'inconterms',
         'third',
         'buque',
         'from',
@@ -36,6 +34,8 @@ class DetailSale extends Model
         'second_state_id',
         'port_id',
         'discharge_port_id',
+        'ops_id',
+        'inconterm_id',
     ];
 
     public function sale() : BelongsTo
@@ -109,6 +109,16 @@ class DetailSale extends Model
         return $this->belongsTo(Port::class);
     }
 
+    public function ops() : BelongsTo
+    {
+        return $this->belongsTo(Ops::class);
+    }
+
+    public function inconterm() : BelongsTo
+    {
+        return $this->belongsTo(Iconterm::class);
+    }
+
     protected static function boot() {
         parent::boot();
     
@@ -130,6 +140,8 @@ class DetailSale extends Model
                     'second_state_id' => SecondState::class,
                     'port_id' => Port::class,
                     'discharge_port_id' => DischargePort::class,
+                    'ops_id'=> Ops::class,
+                    'inconterm_id'=> Iconterm::class,
                 ];
 
                 $fields = [
@@ -145,6 +157,8 @@ class DetailSale extends Model
                     'second_state_id' => 'Segundo Estado',
                     'port_id' => 'Puerto',
                     'discharge_port_id' => 'Puerto de Descarga',
+                    'ops_id' => 'OPS',
+                    'inconterm_id' => 'Inconterms',
                 ];
     
                 if (array_key_exists($field, $relations)) {

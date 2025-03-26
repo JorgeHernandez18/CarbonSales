@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\DetailSale;
+use App\Models\Sale;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -11,6 +12,10 @@ class DetailSaleSecondStateOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
+            Stat::make('Ventas', Sale::query()->count())
+                ->description('Total de ventas')
+                ->descriptionIcon('heroicon-o-currency-dollar')
+                ->color('success'),
             Stat::make('Pendiente', DetailSale::query()->where('second_state_id','1')->count())
                 ->description('Detalles de venta pendientes')
                 ->descriptionIcon('heroicon-o-clock')
