@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
 class DetailSalesRelationManager extends RelationManager
 {
     protected static string $relationship = 'detail_sale';
@@ -303,6 +305,7 @@ class DetailSalesRelationManager extends RelationManager
                     //->visible(fn (Model $record): bool => $this->isEditable($record)),
             ])
             ->bulkActions([
+                ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
                         //->visible(fn (): bool => !$this->getOwnerRecord()->state),
