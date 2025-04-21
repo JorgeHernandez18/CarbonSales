@@ -71,6 +71,7 @@ class LogResource extends Resource
                     ->label('Filtrar por Usuario'),
             ])
             ->defaultSort('modified_date', 'desc');
+            
     }
 
     public static function getRelations(): array

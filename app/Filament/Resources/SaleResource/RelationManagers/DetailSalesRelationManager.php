@@ -251,6 +251,9 @@ class DetailSalesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('sale.contract')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('Contrato'),
                 Tables\Columns\TextColumn::make('ops.name')
                     ->label('OPS'),
                 Tables\Columns\TextColumn::make('supplier.name')
@@ -305,9 +308,9 @@ class DetailSalesRelationManager extends RelationManager
                     //->visible(fn (Model $record): bool => $this->isEditable($record)),
             ])
             ->bulkActions([
-                ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+                    Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make(),
                         //->visible(fn (): bool => !$this->getOwnerRecord()->state),
                 ]),
             ])

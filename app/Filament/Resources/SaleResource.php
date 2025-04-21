@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\SaleExporter;
+use App\Filament\Exports\SalesExporter;
 use App\Filament\Resources\SaleResource\Pages;
 use App\Filament\Resources\SaleResource\Pages\LogsSale;
 use App\Filament\Resources\SaleResource\RelationManagers;
@@ -94,6 +96,10 @@ class SaleResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                /* Tables\Actions\ExportAction::make()
+                ->label('Exportar')
+                ->exporter(SaleExporter::class) */
+
                 /* Tables\Actions\Action::make('settle')
                     ->label('Asentar venta')
                     ->icon('heroicon-o-lock-closed')
@@ -113,9 +119,10 @@ class SaleResource extends Resource
                     }), */
             ])
             ->bulkActions([
-                ExportBulkAction::make(),
+                
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
                 ]),
             ]);
     }
